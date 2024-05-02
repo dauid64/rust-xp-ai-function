@@ -13,7 +13,7 @@ unused = "allow"
 
 tokio = {version = "1", features = ["full"]}
 
-async_openai = "0.19"
+async-openai = "0.19"
 
 serde = {version = "1", features = ["derive"]}
 serde_json = "1"
