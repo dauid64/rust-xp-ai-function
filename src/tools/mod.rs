@@ -2,11 +2,13 @@
 
 mod ai_tools;
 mod weather;
+mod spec;
 
 // -- Flatten
 pub use ai_tools::*;
-use rpc_router::{ResourcesBuilder, RouterBuilder};
+pub use spec::*;
 
+use rpc_router::{ResourcesBuilder, RouterBuilder};
 use crate::{chat, Result};
 
 // endregion: --- Modules

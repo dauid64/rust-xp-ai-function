@@ -4,6 +4,7 @@ mod error;
 
 pub use error::{Error, Result};
 
+pub mod utils;
 pub mod tools;
 pub mod conv;
 pub mod chat;
