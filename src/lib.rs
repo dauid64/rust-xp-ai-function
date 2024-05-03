@@ -10,5 +10,6 @@ pub mod conv;
 pub mod chat;
 pub mod gpts;
 pub mod oa_client;
+pub mod model;
 
 // endregion: --- Modules

@@ -1,5 +1,5 @@
-use rpc_router::{router_builder, RpcParams};
-use rust_xp_ai_function::{chat, conv, oa_client::{self, new_oa_client}, tools::{new_ai_tools, AiTools}};
+use rpc_router::{resources_builder, router_builder, RpcParams};
+use rust_xp_ai_function::{chat, conv, model::ModelManager, oa_client::{self, new_oa_client}, tools::{new_ai_tools, AiTools}};
 use serde::{Deserialize, Serialize};
 use serde_json::json;
 use tokio::task::JoinSet;
@@ -10,7 +10,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let oa_client = new_oa_client()?;
 
     // -- Get the AI Tools
-    let ai_tools = new_ai_tools(None)?;
+    let mm = ModelManager::default();
+    let ai_tools = new_ai_tools(Some(resources_builder![mm]))?;
 
     // -- User question
     let questions = &[
