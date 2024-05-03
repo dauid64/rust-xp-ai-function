@@ -4,6 +4,7 @@ use rust_xp_ai_function::{chat::{self, first_choice}, gpts, oa_client::new_oa_cl
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 
+#[allow(unused)]
 #[derive(Debug, Deserialize, RpcParams)]
 struct GetWeatherParams {
     location: String,

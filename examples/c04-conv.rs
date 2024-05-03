@@ -1,9 +1,9 @@
-use async_openai::types::{ChatCompletionToolChoiceOption, CreateChatCompletionRequest};
 use rpc_router::{router_builder, RpcParams};
-use rust_xp_ai_function::{chat::{self, first_choice}, conv, gpts, oa_client::new_oa_client, tools::AiTools};
+use rust_xp_ai_function::{chat::{self}, conv, oa_client::new_oa_client, tools::AiTools};
 use serde::{Deserialize, Serialize};
-use serde_json::{json, Value};
+use serde_json::json;
 
+#[allow(unused)]
 #[derive(Debug, Deserialize, RpcParams)]
 struct GetWeatherParams {
     location: String,
@@ -30,14 +30,9 @@ async fn get_weather(params: GetWeatherParams) -> Result<Weather, String> {
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // -- Init AI Client
     let oa_client = new_oa_client()?;
-    let chat_client = oa_client.chat();
-    let model = gpts::MODEL;
 
     // -- User question
     let question = "What is the weather in the California's best city and Paris";
-
-    // -- Build messages
-    let messages = vec![chat::user_msg(question)?];
 
     // -- Build tools
     let tool_weather = chat::tool_fn(
