@@ -12,12 +12,24 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let ai_tools = new_ai_tools(None)?;
 
     // -- User question
-    let question = "What is the weather in the California's best city and Paris";
+    let questions = &[
+        "What is the weather in the California's best city and Paris",
+        "Why is the sky red? (be concise)",
+        "what is the weather in italy's capital"
+    ];
 
     // -- Execute question with conv
-    let response = conv::send_user_msg(oa_client, ai_tools, question).await?;
+    for &question in questions {
+        let response = conv::send_user_msg(oa_client.clone(), ai_tools.clone(), question).await?;
 
-    println!("\nFinal asnwer:\n\n{response}");
+        println!(
+            r#"
+            == Question: {question}
+            {response}
+            "#
+        );
+    }
+    
 
     Ok(())
 }

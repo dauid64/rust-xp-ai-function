@@ -30,7 +30,6 @@ pub async fn send_user_msg(oa_client: OaClient, ai_tools: AiTools, question: &st
 
     // -- If message.content, end early
     if let Some(response_content) = first_choice.message.content {
-        println!("\nResponse early (no tools):\n\n{response_content}");
         return Ok(response_content);
     }
 

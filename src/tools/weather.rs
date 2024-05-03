@@ -10,28 +10,7 @@ pub(super) fn router_builder() -> RouterBuilder {
 }
 
 pub(super) fn chat_tools() -> crate::Result<Vec<ChatCompletionTool>> {
-    let tool_weather = chat::tool_fn(
-        "get_weather", 
-        "get the weather for a city", 
-        json!({
-            "type": "object",
-            "properties": {
-                "location": {
-                    "type": "string",
-                    "description": "The city and state, e.g. San Francisco, CA"
-                },
-                "country": {
-                    "type": "string",
-                    "description": "The full country name of the city"
-                },
-                "unit": {
-                    "type": "string", "enum": ["celsius", "fahrenheit"],
-                    "description": "Unit respecting the country of the city"
-                }
-            },
-            "required": ["location", "country", "unit"],
-        }),
-    )?;
+    let tool_weather = chat::tool_fn_from_type::<GetWeatherParams>()?;
     
     Ok(vec![tool_weather])
 }
